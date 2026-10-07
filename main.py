@@ -31,7 +31,7 @@ def game_comp():
 def gasme_two():
     username1, username2 = playrs_name()
     player1, player2 = rand_user(name1=username1, name2=username2)
-    print(f"{player1}, укажите диапазон и заг загадываемое число")
+    print(f"{player1}, укажите диапазон и загадываемое число")
     num_player1 = diapazon_game2()
 
     print(f"{player2}, попытайтесь угадать число")
@@ -50,8 +50,8 @@ def gasme_two():
             print("Не угадали")
 
 
-
-    print("Теперь меняемся ролями")
+    #сделать задержку по выводу
+    print("\n\nТеперь меняемся ролями")
     print(f"{player2}, укажите диапазон и загадываемое число")
     num_player2 = diapazon_game2()
 
