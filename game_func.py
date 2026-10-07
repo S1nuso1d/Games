@@ -1,0 +1,38 @@
+import random
+
+def playrs_name() -> tuple[str, str]:
+    username1 = input("\nВведите имя игрока 1: ")
+    username2 = input("Введите имя игрока 2: ")
+    return username1, username2
+
+
+def rand_user(*, name1="User1", name2="User2") -> tuple[str, str]:
+    players = [name1, name2]
+    random.shuffle(players)
+    print(f"Первым будет {players[0]}")
+    print(f"{players[1]}, ты будешь вторым")
+    return players[0], players[1]
+
+
+def diapazon_game1() -> int:
+    rang1 = 0
+    rang2 = 0
+    while rang1 >= rang2 and rang2 > 99:
+        try:
+            rang1 = int(input("Введите диапазон от(0-99):  "))
+            rang2 = int(input("Введите диапазон до(0-99):  "))
+        except ValueError:
+            print("Введите лучше число!")
+
+
+    return rang1, rang2
+
+def diapazon_game2() -> int:
+    rang1, rang2 = diapazon_game1()
+    try:
+        num = input("Введите число: ")
+    except ValueError:
+        print("Введите лучше число!")
+
+    return num, rang1, rang2
+
