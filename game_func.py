@@ -1,12 +1,15 @@
 import random
 
 def playrs_name() -> tuple[str, str]:
-    username1 = input("\nВведите имя игрока 1: ")
-    username2 = input("Введите имя игрока 2: ")
-    return username1, username2
+    try:
+        user_name1 = str(input("\nВведите имя игрока 1: "))
+        user_name2 = str(input("Введите имя игрока 2: "))
+    except ValueError:
+        print("Введите имя корректно!")
+    return user_name1, user_name2
 
 
-def rand_user(*, name1="User1", name2="User2") -> tuple[str, str]:
+def random_user(*, name1="User1", name2="User2") -> tuple[str, str]:
     players = [name1, name2]
     random.shuffle(players)
     print(f"Первым будет {players[0]}")

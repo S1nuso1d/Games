@@ -1,5 +1,5 @@
 import random
-
+from game_func import playrs_name
 
 def menu1():
     print("\tДобро пожаловать в игру Викторина")
@@ -12,12 +12,6 @@ def menu2():
     print("2. Рекорды")
     print("3. Правила")
     print("4. Назад")
-
-
-def playrs_name():
-    username1 = input("\nВведите имя игрока 1: ")
-    username2 = input("Введите имя игрока 2: ")
-    return username1, username2
 
 
 def record(rec1, rec2, u_n1, u_n2):
@@ -85,42 +79,47 @@ def games(name1, name2):
     return points[name1], points[name2]
 
 
-user1_rec = 0
-user2_rec = 0
+def game():
+    user1_rec = 0
+    user2_rec = 0
 
-us_name1 = ""
-us_name2 = ""
+    us_name1 = ""
+    us_name2 = ""
 
-while True:
-    menu1()
-    choice_menu1 = input("Ваш выбор: ")
+    while True:
+        menu1()
+        choice_menu1 = input("Ваш выбор: ")
 
-    if choice_menu1 == "2":
-        break
+        if choice_menu1 == "2":
+            break
 
-    if choice_menu1 == "1":
+        if choice_menu1 == "1":
 
-        while True:
-            menu2()
-            choice_menu2 = input("Ваш выбор: ")
+            while True:
+                menu2()
+                choice_menu2 = input("Ваш выбор: ")
 
-            if choice_menu2 == "4":
-                break
+                if choice_menu2 == "4":
+                    break
 
-            if choice_menu2 == "3":
-                print("В эту игра могут играть 2 пользователя. Перед вами будет 5 вопросов каждому, после игры мы подсчитаем сколько набрал каждый из участников")
+                if choice_menu2 == "3":
+                    print("В эту игра могут играть 2 пользователя. Перед вами будет 5 вопросов каждому, после игры мы подсчитаем сколько набрал каждый из участников")
 
-            if choice_menu2 == "2":
-                record(user1_rec, user2_rec, us_name1, us_name2)
+                if choice_menu2 == "2":
+                    record(user1_rec, user2_rec, us_name1, us_name2)
 
-            if choice_menu2 == "1":
+                if choice_menu2 == "1":
 
-                if us_name1 == "" and us_name2 == "":
-                    us_name1, us_name2 = playrs_name()
+                    if us_name1 == "" and us_name2 == "":
+                        us_name1, us_name2 = playrs_name()
 
-                points1, points2 = games(us_name1, us_name2)
+                    points1, points2 = games(us_name1, us_name2)
 
-                if points1 > user1_rec:
-                    user1_rec = points1
-                if points2 > user2_rec:
-                    user2_rec = points2
+                    if points1 > user1_rec:
+                        user1_rec = points1
+                    if points2 > user2_rec:
+                        user2_rec = points2
+
+
+if __name__ == "__main__":
+    game()

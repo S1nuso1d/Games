@@ -1,6 +1,6 @@
 #Игра угадай число
 import random
-from game_func import playrs_name, rand_user, diapazon_game1, diapazon_game2
+from game_func import playrs_name, random_user, diapazon_game1, diapazon_game2
 
 
 def menu():
@@ -33,7 +33,7 @@ def game_comp():
 
 def game_two():
     username1, username2 = playrs_name()
-    player1, player2 = rand_user(name1=username1, name2=username2)
+    player1, player2 = random_user(name1=username1, name2=username2)
     print(f"{player1}, укажите диапазон и загадываемое число")
     num_player1 = diapazon_game2()
 
@@ -89,4 +89,6 @@ def game():
         elif choise == "2":
             game_two()
 
-game()
+
+if __name__ == "__main__":
+    game()
