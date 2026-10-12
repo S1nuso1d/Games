@@ -3,14 +3,14 @@ import random
 from game_func import playrs_name, random_user, diapazon_game1, diapazon_game2
 
 
-def menu():
+def menu() -> None:
     print("\nДобро пожаловать в игру угадай число")
     print("1. Играть с компьютером")
     print("2. Играть вдвоем")
     print("3. Выход")
 
 
-def game_comp():
+def game_comp() -> None:
     rang1, rang2 = diapazon_game1()
     radn_nam = random.randint(rang1, rang2)
     print("Компьютер загадал число, попробуй его угадать: ")
@@ -31,7 +31,7 @@ def game_comp():
             print("Не угадали")
 
 
-def game_two():
+def game_two() -> None:
     username1, username2 = playrs_name()
     player1, player2 = random_user(name1=username1, name2=username2)
     print(f"{player1}, укажите диапазон и загадываемое число")
@@ -74,7 +74,7 @@ def game_two():
             print("Не угадали")
 
 
-def game():
+def game() -> None:
     while True:
         menu()
         print("Ваш выбор: ", end="")

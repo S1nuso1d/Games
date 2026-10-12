@@ -3,13 +3,13 @@ import tkinter as tk
 from tkinter import simpledialog
 from game_func import playrs_name, random_user
 
-def menu():
+def menu() -> None:
     print("\nMеню")
     print("1.Начать игру")
     print("2.Выход")
 
 
-def game():
+def game() -> None:
     print("\tПривет")
     print("Это игра висельница")
     print("В ней один игрок загадывает слово, а второй пытается его угадать, при этом у него есть 3 попытки ошибиться")

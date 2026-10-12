@@ -9,7 +9,7 @@ def playrs_name() -> tuple[str, str]:
     return user_name1, user_name2
 
 
-def random_user(*, name1="User1", name2="User2") -> tuple[str, str]:
+def random_user(*, name1 : str ="User1", name2 : str ="User2") -> tuple[str, str]:
     players = [name1, name2]
     random.shuffle(players)
     print(f"Первым будет {players[0]}")

@@ -2,7 +2,7 @@ import guess_number
 import quiz
 import the_gallows
 
-def menu():
+def menu() -> None:
     print("\nMеню")
     print("1. Угадай число")
     print("2. Квиз")
@@ -10,7 +10,7 @@ def menu():
     print("4. Выход")
 
 
-def main():
+def main() -> None:
     while True:
         menu()
         try:

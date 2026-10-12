@@ -1,20 +1,20 @@
 import random
 from game_func import playrs_name
 
-def menu1():
+def menu1() -> None:
     print("\tДобро пожаловать в игру Викторина")
     print("1. Играть")
     print("2. Выход")
 
 
-def menu2():
+def menu2() -> None:
     print("\n1. Играть")
     print("2. Рекорды")
     print("3. Правила")
     print("4. Назад")
 
 
-def record(rec1, rec2, u_n1, u_n2):
+def record(rec1, rec2, u_n1, u_n2) -> None:
     if rec1 == 0 and rec2 == 0:
         print("\nРекордов пока нет")
     else:
@@ -22,7 +22,7 @@ def record(rec1, rec2, u_n1, u_n2):
         print(f"Рекорд по очкам пользователя {u_n2}: {rec2}")
 
 
-def comparison_game(rec1, rec2, u_n1, u_n2):
+def comparison_game(rec1, rec2, u_n1, u_n2) -> None:
     if rec1 > rec2:
         print(f"Игрок {u_n1}, выиграл он набрал {rec1}:{rec2}")
 
@@ -33,7 +33,7 @@ def comparison_game(rec1, rec2, u_n1, u_n2):
         print(f"Победила дружба, вы набрали одинаковое количество очков {rec1}:{rec2}")
 
 
-def games(name1, name2):
+def games(name1, name2) -> tuple[str, str]:
     questions = [
         {"text": "Какой океан самый большой?", "options": "a.Атлантический b.Тихий c.Индийский", "answer": "b"},
         {"text": "Кто из этих животных умеет летать?", "options": "a.Пингвин b.Страус c.Летучая мышь", "answer": "c"},
@@ -79,7 +79,7 @@ def games(name1, name2):
     return points[name1], points[name2]
 
 
-def game():
+def game() -> None:
     user1_rec = 0
     user2_rec = 0
 
