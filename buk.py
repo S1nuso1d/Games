@@ -1,0 +1,115 @@
+import random
+from game_func import playrs_name, random_user
+
+
+def menu() -> None:
+    print("\nМеню")
+    print("1. Играть с компьютером")
+    print("2. Играть вдвоем")
+    print("3. Правила")
+    print("4. Выход")
+
+
+def rules() -> None:
+    print("\nНужно угадать 4 разные цифры.")
+    print("«На своём месте» — цифра стоит правильно.")
+    print("«Есть, но стоит не на своём месте» — цифра есть, но позиция другая.")
+
+
+def read_digits(player: str) -> list[int]:
+    digits = []
+    while len(digits) < 4:
+        try:
+            digit = int(input(f"{player}, введите цифру: "))
+        except ValueError:
+            print("Введите лучше число!")
+            continue
+        if digit < 0 or digit > 9:
+            print("Нужна цифра от 0 до 9")
+            continue
+        if digit in digits:
+            print("Цифры не должны повторяться")
+            continue
+        digits.append(digit)
+    return digits
+
+
+def show_matches(secret: list[int], guess: list[int]) -> int:
+    used_secret = [False, False, False, False]
+    used_guess = [False, False, False, False]
+    bulls = 0
+
+    for i in range(4):
+        if guess[i] == secret[i]:
+            used_secret[i] = True
+            used_guess[i] = True
+            bulls += 1
+            print(guess[i], "на своём месте")
+
+    for a in range(4):
+        if used_guess[a]:
+            continue
+        for i in range(4):
+            if used_secret[i]:
+                continue
+            if guess[a] == secret[i]:
+                used_secret[i] = True
+                print(guess[a], "есть, но стоит не на своём месте")
+                break
+
+    return bulls
+
+
+def play_computer() -> None:
+    computer_choice = random.sample(range(10), 4)
+    print("Компьютер загадал 4 разные цифры")
+
+    while True:
+        players_num = read_digits("Вы")
+        if show_matches(computer_choice, players_num) == 4:
+            print("Вы угадали")
+            break
+        print("Попробуйте ещё раз")
+
+
+def play_two() -> None:
+    user_name1, user_name2 = playrs_name()
+    # random_user возвращает сначала того, кто ходит первым
+    players1, players2 = random_user(name1=user_name1, name2=user_name2)
+
+    print(f"{players1} загадывает число первым")
+    list_players1 = read_digits(players1)
+    print("\n" * 40)
+
+    print(f"{players2}, угадайте число")
+    while True:
+        list_players2 = read_digits(players2)
+        if show_matches(list_players1, list_players2) == 4:
+            print(f"{players2}, вы угадали")
+            break
+        print("Попробуйте ещё раз")
+
+
+def game() -> None:
+    while True:
+        menu()
+        try:
+            choice = int(input("Ваш выбор: "))
+        except ValueError:
+            print("Введите лучше число!")
+            continue
+
+        if choice == 4:
+            break
+        elif choice == 1:
+            play_computer()
+        elif choice == 2:
+            play_two()
+        elif choice == 3:
+            rules()
+        else:
+            print("Введите число от 1 до 4")
+
+
+if __name__ == "__main__":
+    game()
