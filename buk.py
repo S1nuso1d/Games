@@ -11,9 +11,10 @@ def menu() -> None:
 
 
 def rules() -> None:
-    print("\nНужно угадать 4 разные цифры.")
+    print("\nНужно угадать 4 разные цифры. Попыток: 5.")
     print("«На своём месте» — цифра стоит правильно.")
     print("«Есть, но стоит не на своём месте» — цифра есть, но позиция другая.")
+    print("В игре вдвоём после пяти попыток игроки меняются ролями.")
 
 
 def read_digits(player: str) -> list[int]:
@@ -60,34 +61,44 @@ def show_matches(secret: list[int], guess: list[int]) -> int:
     return bulls
 
 
+def try_guess(secret: list[int], player: str) -> None:
+    lives = 5
+
+    while lives > 0:
+        print(f"\n{player}, попытка {6 - lives} из 5")
+        guess = read_digits(player)
+        if show_matches(secret, guess) == 4:
+            print(f"{player}, вы угадали")
+            return
+
+        lives -= 1
+        print(f"Осталось попыток: {lives}")
+
+    print("Попытки закончились")
+    print("Число было:", "".join(str(digit) for digit in secret))
+
+
+def play_round(setter: str, guesser: str) -> None:
+    print(f"{setter}, загадайте число")
+    secret = read_digits(setter)
+    print("\n" * 40)
+    try_guess(secret, guesser)
+
+
 def play_computer() -> None:
     computer_choice = random.sample(range(10), 4)
     print("Компьютер загадал 4 разные цифры")
-
-    while True:
-        players_num = read_digits("Вы")
-        if show_matches(computer_choice, players_num) == 4:
-            print("Вы угадали")
-            break
-        print("Попробуйте ещё раз")
+    try_guess(computer_choice, "Вы")
 
 
 def play_two() -> None:
     user_name1, user_name2 = playrs_name()
-    # random_user возвращает сначала того, кто ходит первым
     players1, players2 = random_user(name1=user_name1, name2=user_name2)
 
-    print(f"{players1} загадывает число первым")
-    list_players1 = read_digits(players1)
-    print("\n" * 40)
+    play_round(players1, players2)
 
-    print(f"{players2}, угадайте число")
-    while True:
-        list_players2 = read_digits(players2)
-        if show_matches(list_players1, list_players2) == 4:
-            print(f"{players2}, вы угадали")
-            break
-        print("Попробуйте ещё раз")
+    print("\n\nТеперь меняемся ролями")
+    play_round(players2, players1)
 
 
 def game() -> None:
