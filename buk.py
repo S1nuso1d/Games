@@ -8,46 +8,80 @@ def menu() -> None:
     print("3. Правила")
     print("4. Выход")
 
+
+def read_four(player: str) -> list[int]:
+    digits = []
+    for i in range(4):
+        digits.append(int(input(f"{player}, введите цифру: ")))
+    return digits
+
+
+def show_matches(secret: list[int], guess: list[int]) -> int:
+    used_secret = [False, False, False, False]
+    used_guess = [False, False, False, False]
+    bulls = 0
+
+    for i in range(4):
+        if guess[i] == secret[i]:
+            used_secret[i] = True
+            used_guess[i] = True
+            bulls += 1
+            print(guess[i], "на своём месте")
+
+    for a in range(4):
+        if used_guess[a]:
+            continue
+        for i in range(4):
+            if used_secret[i]:
+                continue
+            if guess[a] == secret[i]:
+                used_secret[i] = True
+                print(guess[a], "есть, но стоит не на своём месте")
+                break
+
+    return bulls
+
+
+def try_guess(secret: list[int], player: str) -> None:
+    lives = 5
+
+    while lives > 0:
+        guess = read_four(player)
+        if show_matches(secret, guess) == 4:
+            print(f"{player}, вы угадали")
+            return
+
+        lives -= 1
+        print(f"Осталось попыток: {lives}")
+
+    print("Попытки закончились")
+    print("Число было:", secret)
+
+
 def play_computer() -> None:
     computer_choice = []
 
     for i in range(4):
         computer_choice.append(random.randint(1, 10))
 
-    players_num = []
+    try_guess(computer_choice, "Вы")
 
-    for i in range(4):
-        players_num.append(int(input("Введите ваши цифры по одной: ")))
 
-    print(players_num)
+def play_two() -> None:
+    user_name1, user_name2 = playrs_name()
+    players1, players2 = random_user(name1=user_name1, name2=user_name2)
 
-    used_computer = [False, False, False, False]
-    used_player = [False, False, False, False]
-    for i in range(4):
-        if players_num[i] == computer_choice[i]:
-            used_computer[i] = True
-            used_player[i] = True
-            print(players_num[i], "на своём месте")
+    print(f"{players1}, загадайте число")
+    list_players1 = read_four(players1)
+    print("\n" * 40)
+    try_guess(list_players1, players2)
 
-    for a in range(4):
-        if used_player[a]:
-            continue
-        for i in range(4):
-            if used_computer[i]:
-                continue
-            if players_num[a] == computer_choice[i]:
-                used_computer[i] = True
-                print(players_num[a], "есть, но стоит не на своём месте")
-                break
+    print("\n\nТеперь меняемся ролями")
+    print(f"{players2}, загадайте число")
+    list_players2 = read_four(players2)
+    print("\n" * 40)
+    try_guess(list_players2, players1)
 
-user_name1 = ""
-user_name2 = ""
-
-players1 = ""
-players2 = ""
-
-list_players1 = []
-list_players2 = []
 
 menu()
 while True:
@@ -59,7 +93,11 @@ while True:
         play_computer()
 
     elif choice == 2:
-        user_name1, user_name2 = playrs_name()
-        players1, players2 = random_user(name1= user_name1, name2= user_name2)
-        for i in range(4):
-            list_players1.append(int(input(f"{players1} Введите ваши цифры по одной: ")))
+        play_two()
+
+    elif choice == 3:
+        print("\nНужно угадать 4 цифры. Попыток: 5.")
+        print("После раунда игроки меняются ролями.")
+
+    else:
+        print("Введите число от 1 до 4")
