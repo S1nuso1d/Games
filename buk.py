@@ -83,28 +83,32 @@ def play_two() -> None:
     try_guess(list_players2, players1)
 
 
-while True:
-    menu()
-    try:
-        choice = int(input("Ваш выбор: "))
-    except ValueError:
-        print("Введите лучше число!")
+def game() -> None:
+    while True:
+        menu()
+        try:
+            choice = int(input("Ваш выбор: "))
+        except ValueError:
+            print("Введите лучше число!")
+
+        if choice == 4:
+            break
+
+        elif choice == 1:
+            play_computer()
+
+        elif choice == 2:
+            play_two()
+
+        elif choice == 3:
+            print("\nПравила игры")
+            print("Если играете с компьютером, то он загадывает 4 цифры от 1 до 10 и вам нужно угадать, с 5 попыток")
+            print("Если играете вдвоем, то случайным образом выбирается игрок который будет загадывать цифры от 1 до 10")
+            print("и второй игрок, который должен угать и у него будет 5 попыток, далее вы поменяетесь.")
+
+        else:
+            print("Введите число от 1 до 4")
 
 
-    if choice == 4:
-        break
-
-    elif choice == 1:
-        play_computer()
-
-    elif choice == 2:
-        play_two()
-
-    elif choice == 3:
-        print("\nПравила игры")
-        print("Если играете с компьютером, то он загадывает 4 цифры от 1 до 10 и вам нужно угадать, с 5 попыток")
-        print("Если играете вдвоем, то случайным образом выбирается игрок который будет загадывать цифры от 1 до 10")
-        print("и второй игрок, который должен угать и у него будет 5 попыток, далее вы поменяетесь.")
-
-    else:
-        print("Введите число от 1 до 4")
+if __name__ == "__main__":
+    game()
